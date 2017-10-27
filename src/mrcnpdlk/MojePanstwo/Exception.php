@@ -2,7 +2,7 @@
 /**
  * MOJEPANSTWO-API
  *
- * Copyright (c) 2017 pudelek.org.pl
+ * Copyright © 2017 pudelek.org.pl
  *
  * @license MIT License (MIT)
  *
@@ -14,7 +14,11 @@
 
 namespace mrcnpdlk\MojePanstwo;
 
-
+/**
+ * Class Exception
+ *
+ * @package mrcnpdlk\MojePanstwo
+ */
 class Exception extends \Exception
 {
 
