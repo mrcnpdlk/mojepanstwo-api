@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0539c9cc8443aa8ca32b622c896bdd0",
+    "content-hash": "cbca35c7d1aa129f9a1b87cf561f3a24",
     "packages": [
+        {
+            "name": "mrcnpdlk/psr16cache-adapter",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mrcnpdlk/psr16cache-adapter.git",
+                "reference": "246520698c7af2d715f31390463788dd4f09bbcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mrcnpdlk/psr16cache-adapter/zipball/246520698c7af2d715f31390463788dd4f09bbcb",
+                "reference": "246520698c7af2d715f31390463788dd4f09bbcb",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "~1.0",
+                "psr/simple-cache": "~1.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "^1.23",
+                "phpfastcache/phpfastcache": "~6.0",
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mrcnpdlk\\Psr16Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Pudełek",
+                    "email": "marcin@pudelek.org.pl"
+                }
+            ],
+            "description": "Cache adapter for PSR-16",
+            "keywords": [
+                "cache",
+                "psr16"
+            ],
+            "time": "2017-10-27T20:09:21+00:00"
+        },
         {
             "name": "psr/log",
             "version": "1.0.2",
@@ -234,6 +280,46 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "mrcnpdlk/monolog",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mrcnpdlk/monolog.git",
+                "reference": "a89b6ae22de6b9ad1b244ff187ea11acad55eea6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mrcnpdlk/monolog/zipball/a89b6ae22de6b9ad1b244ff187ea11acad55eea6",
+                "reference": "a89b6ae22de6b9ad1b244ff187ea11acad55eea6",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "~1.23",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "graylog2/gelf-php": "~1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mrcnpdlk\\Monolog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "library"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Pudełek",
+                    "email": "marcin@pudelek.org.pl"
+                }
+            ],
+            "description": "Logger",
+            "time": "2017-10-27T20:04:24+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1783,7 +1869,6 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0",
-        "ext-soap": "*",
         "ext-curl": "*"
     },
     "platform-dev": []
