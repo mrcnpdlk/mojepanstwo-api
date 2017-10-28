@@ -24,7 +24,7 @@ namespace mrcnpdlk\MojePanstwo\Model;
 
 class KrsEntity extends ModelAbstract
 {
-    const PREFIX = 'krs_podmioty';
+    const CONTEXT = 'krs_podmioty';
 
     /**
      * id
@@ -285,7 +285,6 @@ class KrsEntity extends ModelAbstract
      * wczesniejsza_rejestracja_str
      **/
     public $wczesniejsza_rejestracja_str;
-
     /**
      * www
      **/

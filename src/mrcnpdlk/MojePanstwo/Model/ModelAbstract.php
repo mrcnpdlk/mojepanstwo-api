@@ -22,9 +22,11 @@ declare (strict_types=1);
 namespace mrcnpdlk\MojePanstwo\Model;
 
 
+use mrcnpdlk\MojePanstwo\Api;
+
 class ModelAbstract
 {
-    const PREFIX = '';
+    const CONTEXT = '';
 
     /**
      * ModelAbstract constructor.
@@ -39,7 +41,10 @@ class ModelAbstract
             foreach ($oData as $key => $value) {
                 $key = $this->stripProperty($key);
                 if (!property_exists($this, $key)) {
-                    throw new \Exception(sprintf('Property [%s] not extists in object [%s]', $key, get_class($this)));
+                    Api::getInstance()
+                       ->getClient()
+                       ->getLogger()
+                       ->warning(sprintf('Property [%s] not exists in object [%s]', $key, get_class($this)));
                 } elseif (!is_array($value) && !is_object($value)) {
                     $this->{$key} = is_string($value) && $value === '' ? null : $value;
                 }
@@ -64,7 +69,7 @@ class ModelAbstract
      */
     protected function stripProperty(string $property)
     {
-        return str_replace(static::PREFIX . '.', '', $property);
+        return str_replace(static::CONTEXT . '.', '', $property);
     }
 
 }

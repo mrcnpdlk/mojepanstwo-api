@@ -81,9 +81,16 @@ class Api
     public function getKrsEntity(string $krs)
     {
         $krs = ltrim($krs, '0');
-        $res = $this->oClient->request('krs_podmioty', intval($krs));
+        $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs));
 
         return new KrsEntity($res->data);
+    }
+
+    /**
+     * @return \mrcnpdlk\MojePanstwo\Client
+     */
+    public function getClient(){
+        return $this->oClient;
     }
 
 }

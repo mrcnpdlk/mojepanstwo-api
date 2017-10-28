@@ -100,8 +100,13 @@ class Client
         }
         $url = implode('/', $tPath);
 
-        return $this->curlRequest($url);
-
+        return $this->oCacheAdapter->useCache(
+            function () use ($url) {
+                return $this->curlRequest($url);
+            },
+            [$url],
+            60
+        );
     }
 
     /**

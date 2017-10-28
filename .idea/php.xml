@@ -38,7 +38,6 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/psr16cache-adapter" />
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/monolog" />
-      <path value="$PROJECT_DIR$/vendor/php-curl-class/php-curl-class" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
