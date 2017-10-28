@@ -44,11 +44,22 @@ class Client
      */
     private $oLogger;
 
+    /**
+     * Client constructor.
+     *
+     * @param string $apiUrl
+     */
     public function __construct(string $apiUrl = 'https://api-v3.mojepanstwo.pl/dane/')
     {
         $this->sApiUrl = $apiUrl;
     }
 
+    /**
+     * @param string $url
+     *
+     * @return mixed
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     private function curlRequest(string $url)
     {
         $ch = curl_init();
@@ -86,6 +97,13 @@ class Client
         return $this->oLogger;
     }
 
+    /**
+     * @param string                                  $context
+     * @param int|null                                $id
+     * @param \mrcnpdlk\MojePanstwo\QueryBuilder|null $oParams
+     *
+     * @return \stdClass
+     */
     public function request(string $context, int $id = null, QueryBuilder $oParams = null)
     {
         $tPath = [

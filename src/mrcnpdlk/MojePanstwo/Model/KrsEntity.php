@@ -32,7 +32,18 @@ use mrcnpdlk\MojePanstwo\Model\KrsEntity\Share;
 
 class KrsEntity extends ModelAbstract
 {
-    const CONTEXT = 'krs_podmioty';
+    const CONTEXT                    = 'krs_podmioty';
+    const PULL_NONE                  = 0;
+    const PULL_COMPANIES             = 1;
+    const PULL_DEPARTMENTS           = 2;
+    const PULL_PARTNERS              = 4;
+    const PULL_PKDS                  = 8;
+    const PULL_SHARES                = 16;
+    const PULL_PERSON_REPRESENTATION = 32;
+    const PULL_PERSON_SUPERVISION    = 64;
+    const PULL_PERSON_PROXY          = 128;
+    const PULL_ALL                   = 255;
+
 
     /**
      * id
@@ -154,12 +165,14 @@ class KrsEntity extends ModelAbstract
      * forma_prawna_typ_id
      **/
     public $forma_prawna_typ_id;
-
+    /**
+     * gpw
+     **/
+    public $gpw;
     /**
      * gpw_spolka_id
      **/
     public $gpw_spolka_id;
-
     /**
      * knf_ostrzezenie_id
      **/
@@ -224,7 +237,6 @@ class KrsEntity extends ModelAbstract
      * nieprzedsiebiorca
      **/
     public $nieprzedsiebiorca;
-
     /**
      * numer_wpisu
      **/
@@ -301,7 +313,6 @@ class KrsEntity extends ModelAbstract
      * wykreslony
      **/
     public $wykreslony;
-
     /**
      * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Pkd[]
      */

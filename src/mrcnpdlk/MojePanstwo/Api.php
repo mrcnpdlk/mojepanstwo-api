@@ -86,25 +86,42 @@ class Api
      *
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
      */
-    public function getKrsEntity($krs)
+    public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE)
     {
         $krs = intval($krs);
 
-        $qb  = QueryBuilder::create()
-                           ->setContext(KrsEntity::CONTEXT)
-                           ->addLayer('dzialalnosci')//
-                           ->addLayer('emisje_akcji')//
-                           ->addLayer('firmy')//
-                           ->addLayer('jedynyAkcjonariusz')
-                           ->addLayer('komitetZalozycielski')
-                           ->addLayer('nadzor')//
-                           ->addLayer('oddzialy')
-                           ->addLayer('prokurenci')//
-                           ->addLayer('reprezentacja')//
-                           ->addLayer('wspolnicy') //
+        $qb = QueryBuilder::create()
+                          ->addLayer('jedynyAkcjonariusz')
+                          ->addLayer('komitetZalozycielski')
         ;
+        if ($pullFlag & KrsEntity::PULL_COMPANIES) {
+            $qb->addLayer('firmy');
+        }
+        if ($pullFlag & KrsEntity::PULL_DEPARTMENTS) {
+            $qb->addLayer('oddzialy');
+        }
+        if ($pullFlag & KrsEntity::PULL_PARTNERS) {
+            $qb->addLayer('wspolnicy');
+        }
+        if ($pullFlag & KrsEntity::PULL_PKDS) {
+            $qb->addLayer('dzialalnosci');
+        }
+        if ($pullFlag & KrsEntity::PULL_SHARES) {
+            $qb->addLayer('emisje_akcji');
+        }
+        if ($pullFlag & KrsEntity::PULL_PERSON_REPRESENTATION) {
+            $qb->addLayer('reprezentacja');
+        }
+        if ($pullFlag & KrsEntity::PULL_PERSON_SUPERVISION) {
+            $qb->addLayer('nadzor');
+        }
+        if ($pullFlag & KrsEntity::PULL_PERSON_PROXY) {
+            $qb->addLayer('prokurenci');
+        }
+
+
+
         $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs), $qb);
-        var_dump($res->layers);
 
         return new KrsEntity($res->data ?? null, $res->layers ?? null);
     }
