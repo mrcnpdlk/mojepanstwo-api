@@ -22,7 +22,9 @@ declare (strict_types=1);
 namespace mrcnpdlk\MojePanstwo\Model;
 
 
+use mrcnpdlk\MojePanstwo\Api;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity\Companies;
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Department;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity\Partner;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity\Person;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity\Pkd;
@@ -329,6 +331,11 @@ class KrsEntity extends ModelAbstract
      */
     public $wspolnicy = [];
 
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Department
+     */
+    public $oddzialy = [];
+
     public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
         parent::__construct($oData);
@@ -382,6 +389,25 @@ class KrsEntity extends ModelAbstract
                 foreach ($oLayers->wspolnicy as $i) {
                     $this->wspolnicy[] = new Partner($i);
                 }
+            }
+            if (isset($oLayers->oddzialy)) {
+                foreach ($oLayers->oddzialy as $i) {
+                    $this->oddzialy[] = new Department($i);
+                }
+            }
+            if (isset($oLayers->jedynyAkcjonariusz) && !empty($oLayers->jedynyAkcjonariusz)) {
+                Api::getInstance()
+                   ->getClient()
+                   ->getLogger()
+                   ->warning(sprintf('jedynyAkcjonariusz not defined'))
+                ;
+            }
+            if (isset($oLayers->komitetZalozycielski) && !empty($oLayers->komitetZalozycielski)) {
+                Api::getInstance()
+                   ->getClient()
+                   ->getLogger()
+                   ->warning(sprintf('komitetZalozycielski not defined'))
+                ;
             }
         }
     }

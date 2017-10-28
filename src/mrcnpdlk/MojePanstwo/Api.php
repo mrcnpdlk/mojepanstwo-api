@@ -92,20 +92,21 @@ class Api
 
         $qb  = QueryBuilder::create()
                            ->setContext(KrsEntity::CONTEXT)
-                           ->addLayer('dzialalnosci')
-                           ->addLayer('emisje_akcji')
-                           ->addLayer('firmy')
+                           ->addLayer('dzialalnosci')//
+                           ->addLayer('emisje_akcji')//
+                           ->addLayer('firmy')//
                            ->addLayer('jedynyAkcjonariusz')
                            ->addLayer('komitetZalozycielski')
-                           ->addLayer('nadzor')
+                           ->addLayer('nadzor')//
                            ->addLayer('oddzialy')
-                           ->addLayer('prokurenci')
-                           ->addLayer('reprezentacja')
-                           ->addLayer('wspolnicy')
+                           ->addLayer('prokurenci')//
+                           ->addLayer('reprezentacja')//
+                           ->addLayer('wspolnicy') //
         ;
         $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs), $qb);
+        var_dump($res->layers);
 
-        return new KrsEntity($res->data, $res->layers);
+        return new KrsEntity($res->data ?? null, $res->layers ?? null);
     }
 
 }
