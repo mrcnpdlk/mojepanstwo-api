@@ -22,6 +22,12 @@ declare (strict_types=1);
 namespace mrcnpdlk\MojePanstwo\Model;
 
 
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Companies;
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Partner;
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Person;
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Pkd;
+use mrcnpdlk\MojePanstwo\Model\KrsEntity\Share;
+
 class KrsEntity extends ModelAbstract
 {
     const CONTEXT = 'krs_podmioty';
@@ -294,11 +300,39 @@ class KrsEntity extends ModelAbstract
      **/
     public $wykreslony;
 
-    public function __construct(\stdClass $oData = null)
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Pkd[]
+     */
+    public $dzialalnosci = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Share[]
+     */
+    public $emisje_akcji = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Companies[]
+     */
+    public $firmy = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Person
+     */
+    public $nadzor = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Person
+     */
+    public $prokurenci = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Person
+     */
+    public $reprezentacja = [];
+    /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Partner
+     */
+    public $wspolnicy = [];
+
+    public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
         parent::__construct($oData);
         if ($oData) {
-
             $this->wojewodztwo_id            = $this->convertToId($this->wojewodztwo_id);
             $this->powiat_id                 = $this->convertToId($this->powiat_id);
             $this->gmina_id                  = $this->convertToId($this->gmina_id);
@@ -311,10 +345,44 @@ class KrsEntity extends ModelAbstract
             $this->dotacje_ue_beneficjent_id = $this->convertToId($this->dotacje_ue_beneficjent_id);
             $this->opp                       = $this->convertToId($this->opp);
             $this->ostatni_wpis_id           = $this->convertToId($this->ostatni_wpis_id);
-
-            $this->regon = $this->regon === '0' ? null : $this->regon;
-
-
+            $this->regon                     = $this->regon === '0' ? null : $this->regon;
+        }
+        if ($oLayers) {
+            if (isset($oLayers->dzialalnosci)) {
+                foreach ($oLayers->dzialalnosci as $i) {
+                    $this->dzialalnosci[] = new Pkd($i);
+                }
+            }
+            if (isset($oLayers->emisje_akcji)) {
+                foreach ($oLayers->emisje_akcji as $i) {
+                    $this->emisje_akcji[] = new Share($i);
+                }
+            }
+            if (isset($oLayers->firmy)) {
+                foreach ($oLayers->firmy as $i) {
+                    $this->firmy[] = new Companies($i);
+                }
+            }
+            if (isset($oLayers->nadzor)) {
+                foreach ($oLayers->nadzor as $i) {
+                    $this->nadzor[] = new Person($i);
+                }
+            }
+            if (isset($oLayers->prokurenci)) {
+                foreach ($oLayers->prokurenci as $i) {
+                    $this->prokurenci[] = new Person($i);
+                }
+            }
+            if (isset($oLayers->reprezentacja)) {
+                foreach ($oLayers->reprezentacja as $i) {
+                    $this->reprezentacja[] = new Person($i);
+                }
+            }
+            if (isset($oLayers->wspolnicy)) {
+                foreach ($oLayers->wspolnicy as $i) {
+                    $this->wspolnicy[] = new Partner($i);
+                }
+            }
         }
     }
 }

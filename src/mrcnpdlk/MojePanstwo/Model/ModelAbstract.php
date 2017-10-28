@@ -35,7 +35,7 @@ class ModelAbstract
      *
      * @throws \Exception
      */
-    public function __construct(\stdClass $oData = null)
+    public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
         if (!is_null($oData)) {
             foreach ($oData as $key => $value) {
@@ -44,7 +44,8 @@ class ModelAbstract
                     Api::getInstance()
                        ->getClient()
                        ->getLogger()
-                       ->warning(sprintf('Property [%s] not exists in object [%s]', $key, get_class($this)));
+                       ->warning(sprintf('Property [%s] not exists in object [%s]', $key, get_class($this)))
+                    ;
                 } elseif (!is_array($value) && !is_object($value)) {
                     $this->{$key} = is_string($value) && $value === '' ? null : $value;
                 }

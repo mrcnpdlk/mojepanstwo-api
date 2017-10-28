@@ -74,23 +74,38 @@ class Api
     }
 
     /**
-     * @param string $krs
-     *
-     * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
+     * @return \mrcnpdlk\MojePanstwo\Client
      */
-    public function getKrsEntity(string $krs)
+    public function getClient()
     {
-        $krs = ltrim($krs, '0');
-        $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs));
-
-        return new KrsEntity($res->data);
+        return $this->oClient;
     }
 
     /**
-     * @return \mrcnpdlk\MojePanstwo\Client
+     * @param string|int $krs
+     *
+     * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
      */
-    public function getClient(){
-        return $this->oClient;
+    public function getKrsEntity($krs)
+    {
+        $krs = intval($krs);
+
+        $qb  = QueryBuilder::create()
+                           ->setContext(KrsEntity::CONTEXT)
+                           ->addLayer('dzialalnosci')
+                           ->addLayer('emisje_akcji')
+                           ->addLayer('firmy')
+                           ->addLayer('jedynyAkcjonariusz')
+                           ->addLayer('komitetZalozycielski')
+                           ->addLayer('nadzor')
+                           ->addLayer('oddzialy')
+                           ->addLayer('prokurenci')
+                           ->addLayer('reprezentacja')
+                           ->addLayer('wspolnicy')
+        ;
+        $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs), $qb);
+
+        return new KrsEntity($res->data, $res->layers);
     }
 
 }
