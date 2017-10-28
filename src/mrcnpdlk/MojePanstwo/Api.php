@@ -84,6 +84,8 @@ class Api
     /**
      * @param string|int $krs
      *
+     * @param int        $pullFlag
+     *
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
      */
     public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE)

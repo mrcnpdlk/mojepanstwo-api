@@ -32,8 +32,7 @@ class ModelAbstract
      * ModelAbstract constructor.
      *
      * @param \stdClass|null $oData
-     *
-     * @throws \Exception
+     * @param \stdClass|null $oLayers
      */
     public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
