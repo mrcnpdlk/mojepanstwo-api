@@ -19,12 +19,11 @@
   "require": {
     "php": ">=7.0",
     "ext-curl": "*",
-    "mrcnpdlk/psr16cache-adapter":"~0"
+    "mrcnpdlk/psr16cache-adapter": "~0"
   },
   "require-dev": {
     "mrcnpdlk/monolog": "~0",
-    "phpfastcache/phpfastcache": "~6.0",
-    "phpunit/phpunit": "~6.3"
+    "phpfastcache/phpfastcache": "~6.0"
   },
   "autoload": {
     "psr-4": {
