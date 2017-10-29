@@ -17,6 +17,20 @@
 
 API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
 
+## Api coverage
+
+  | Lp 	| Method name  	        | Returned type   	|
+  |:---:|:---	                |:---	            |
+  |  1 	|   getCommune	        |Commune   	        |
+  |  2 	|   getDistrict	        |District   	    |
+  |  3 	|   getProvince	        |Province   	    |
+  |  4 	|   getKrsEntityType    |KrsEntityType   	|
+  |  5 	|   getKrsEntity	    |KrsEntity   	    |
+  |  6 	|   searchCommune	    |SearchResponse   	|
+  |  7 	|   searchDistrict	    |SearchResponse   	|
+  |  8 	|   searchProvince	    |SearchResponse   	|
+  |  9 	|   searchKrsEntityType	|SearchResponse   	|
+  |  10 |   searchKrsEntity	    |SearchResponse   	|
 
 ## Basic usage
 ### Client settings
