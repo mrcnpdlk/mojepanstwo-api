@@ -86,10 +86,6 @@ class Commune extends ModelAbstract
     /**
      * @var string
      */
-    public $fax;
-    /**
-     * @var string
-     */
     public $adres;
     /**
      * @var string
@@ -103,6 +99,10 @@ class Commune extends ModelAbstract
      * @var string
      */
     public $telefon;
+    /**
+     * @var string
+     */
+    public $fax;
     /**
      * @var float
      */
@@ -157,12 +157,15 @@ class Commune extends ModelAbstract
             $this->wojewodztwo_id     = $this->convertToId($this->wojewodztwo_id);
             $this->powiat_id          = $this->convertToId($this->powiat_id);
             $this->szef_stanowisko_id = $this->convertToId($this->szef_stanowisko_id);
-            $this->wojewodztwo_nazwa  = $this->{'wojewodztwa.nazwa'};
-            $this->powiat_nazwa       = $this->{'powiaty.nazwa'};
-            $this->powierzchnia       = floatval($this->powierzchnia);
-            $this->zadluzenie_roczne  = floatval($this->zadluzenie_roczne);
-            $this->dochody_roczne     = floatval($this->dochody_roczne);
-            $this->nts_teryt          = new Nts($this->nts);
+            $this->telefon            = $this->cleanTelephoneNr($this->telefon);
+            $this->fax                = $this->cleanTelephoneNr($this->fax);
+
+            $this->wojewodztwo_nazwa = $this->{'wojewodztwa.nazwa'};
+            $this->powiat_nazwa      = $this->{'powiaty.nazwa'};
+            $this->powierzchnia      = floatval($this->powierzchnia);
+            $this->zadluzenie_roczne = floatval($this->zadluzenie_roczne);
+            $this->dochody_roczne    = floatval($this->dochody_roczne);
+            $this->nts_teryt         = new Nts($this->nts);
         }
     }
 }

@@ -21,9 +21,13 @@ declare (strict_types=1);
 
 namespace mrcnpdlk\MojePanstwo\Model;
 
-
 use mrcnpdlk\MojePanstwo\Api;
 
+/**
+ * Class ModelAbstract
+ *
+ * @package mrcnpdlk\MojePanstwo\Model
+ */
 class ModelAbstract extends \stdClass
 {
     const CONTEXT = '';
@@ -53,6 +57,27 @@ class ModelAbstract extends \stdClass
     }
 
     /**
+     * Cleaning telephone number
+     *
+     * @param $nr
+     *
+     * @return string|null
+     */
+    protected function cleanTelephoneNr($nr)
+    {
+        if (empty($nr)) {
+            return null;
+        } else {
+            $nr = preg_replace('/[^0-9]/', '', strval($nr));
+
+            //removing zeros only for national numbers (only single zero at the beginning)
+            return preg_replace('/^0(?=([1-9]+[0-9]*))/', '', $nr);
+        }
+    }
+
+    /**
+     * Convert string to integer
+     *
      * @param string $value
      *
      * @return int|null
@@ -63,6 +88,8 @@ class ModelAbstract extends \stdClass
     }
 
     /**
+     * Remove namesoace class from the property name
+     *
      * @param string $property
      *
      * @return string
