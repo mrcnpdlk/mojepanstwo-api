@@ -17,9 +17,10 @@ declare (strict_types=1);
 namespace mrcnpdlk\MojePanstwo;
 
 
+use mrcnpdlk\MojePanstwo\Model\Address\District;
+use mrcnpdlk\MojePanstwo\Model\Address\Province;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
 use mrcnpdlk\MojePanstwo\Model\KrsEntityType;
-use mrcnpdlk\MojePanstwo\Model\Province;
 
 class Api
 {
@@ -76,6 +77,18 @@ class Api
     public function getClient()
     {
         return $this->oClient;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return District
+     */
+    public function getDistrict($id)
+    {
+        $qb = QueryBuilder::create(District::class);
+
+        return $qb->find(strval($id));
     }
 
     /**
@@ -148,6 +161,14 @@ class Api
         $qb = QueryBuilder::create(Province::class);
 
         return $qb->find(strval($id));
+    }
+
+    /**
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     */
+    public function searchDistrict()
+    {
+        return QueryBuilder::create(District::class);
     }
 
     /**
