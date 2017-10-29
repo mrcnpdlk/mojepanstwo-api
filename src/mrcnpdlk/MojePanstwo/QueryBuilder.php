@@ -54,10 +54,11 @@ class QueryBuilder
         }
 
         $this->query['conditions'] = [];
-        $this->query['page']       = 1;
-        $this->query['limit']      = 50;
+        $this->query['order']      = null;
+        $this->query['page']       = null;
+        $this->query['limit']      = null;
         $this->sReturnedClass      = $returnedClass;
-        $this->setContext($returnedClass ? $returnedClass::CONTEXT : null);
+        $this->sContext            = $returnedClass ? $returnedClass::CONTEXT : null;
     }
 
     /**
@@ -140,6 +141,16 @@ class QueryBuilder
      */
     public function getQuery()
     {
+        if (empty($this->query['order'])) {
+            unset($this->query['order']);
+        }
+        if (empty($this->query['page'])) {
+            unset($this->query['page']);
+        }
+        if (empty($this->query['limit'])) {
+            unset($this->query['limit']);
+        }
+
         return http_build_query($this->query);
 
     }
@@ -165,6 +176,13 @@ class QueryBuilder
      */
     public function orderBy(string $property, string $order = 'asc')
     {
+        if (empty($this->sContext)) {
+            $this->query['order'] = $property . ' ' . $order;
+        } else {
+            $this->query['order'] = $this->sContext . '.' . $property . ' ' . $order;
+        }
+
+
         return $this;
     }
 
@@ -175,19 +193,7 @@ class QueryBuilder
      */
     public function page(int $page = 1)
     {
-        $this->query['page'] = $page;
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $sContext
-     *
-     * @return $this
-     */
-    private function setContext(string $sContext = null)
-    {
-        $this->sContext = !empty($sContext) ? $sContext : null;
+        $this->query['page'] = $page < 1 ? 1 : $page;
 
         return $this;
     }
