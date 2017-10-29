@@ -18,6 +18,7 @@ namespace mrcnpdlk\MojePanstwo;
 
 
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
+use mrcnpdlk\MojePanstwo\Model\KrsEntityType;
 
 class Api
 {
@@ -77,9 +78,11 @@ class Api
     }
 
     /**
-     * @param string|int $krs ID or KRS number
+     * Return KRS Entity by ID (krs)
      *
-     * @param int        $pullFlag
+     * @param string|int $krs      ID or KRS number
+     *
+     * @param int        $pullFlag Additional layers. E.i: KrsEntity::PULL_PKDS | KrsEntity::PULL_PERSON_REPRESENTATION
      *
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
      */
@@ -118,9 +121,36 @@ class Api
         return $qb->find(strval($krs));
     }
 
+    /**
+     * @param $id
+     *
+     * @return \mrcnpdlk\MojePanstwo\Model\KrsEntityType
+     */
+    public function getKrsEntityType($id)
+    {
+        $qb = QueryBuilder::create(KrsEntityType::class);
+
+        return $qb->find(strval($id));
+    }
+
+    /**
+     * Return QueryBuilder for searching KRS Entities
+     *
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     */
     public function searchKrsEntity()
     {
         return QueryBuilder::create(KrsEntity::class);
+    }
+
+    /**
+     * Return QueryBuilder for searching KRS Entity Types
+     *
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     */
+    public function searchKrsEntityType()
+    {
+        return QueryBuilder::create(KrsEntityType::class);
     }
 
 }

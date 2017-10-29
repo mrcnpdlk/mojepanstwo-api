@@ -3,10 +3,17 @@
 API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
 
 
- ## Basic usage
- ### Client settings
+## Basic usage
+### Client settings
+Library supports Cache bundles based on [PSR-16](http://www.php-fig.org/psr/psr-16/) standard.
  
- Pushing Log and Cache instances. Not required, but suggested for better performance.
+For below example was used [phpfastcache/phpfastcache](https://github.com/PHPSocialNetwork/phpfastcache).
+`phpfastcache/phpfastcache` supports a lot of endpoints, i.e. `Files`, `Sqlite`, `Redis` and many other. 
+More information about using cache and configuration it you can find in this [Wiki](https://github.com/PHPSocialNetwork/phpfastcache/wiki). 
+Library also supports logging packages based on [PSR-3](http://www.php-fig.org/psr/psr-3/) standard, i.e. very popular
+[monolog/monolog](https://github.com/Seldaek/monolog).
+
+Pushing Log and Cache instances. Not required, but suggested for better performance.
  
 ```php
     $oInstanceCacheRedis = new \phpFastCache\Helper\Psr16Adapter(
@@ -32,8 +39,8 @@ API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
     ;
 ```
 
-  ### Getting KRS Entity
-  #### Request
+### Getting KRS Entity
+#### Request
 ```php
     $oApi = \mrcnpdlk\MojePanstwo\Api::create($oClient);
 
@@ -41,7 +48,7 @@ API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
     print_r($res);
 ```
 
- #### Response
+#### Response
 
 ```php
 mrcnpdlk\MojePanstwo\Model\KrsEntity Object
@@ -123,10 +130,11 @@ mrcnpdlk\MojePanstwo\Model\KrsEntity Object
 )
 ```
 
-  ### Searching KRS Entity
-  #### Request
-  Calling `searchKrsEntity()` method returns QueryBuilder instance, additional functions as `limit()`, `where()`, `page()` are available.
-  At the end call method `get()` to receive `SearchResponse` object.
+### Searching KRS Entity
+#### Request
+Calling `searchKrsEntity()` method returns QueryBuilder instance, additional functions as `limit()`, `where()`, `page()` are available.
+At the end call method `get()` to receive `SearchResponse` object.
+
 ```php
     $res = $oApi->searchKrsEntity()
                 ->limit(2)
@@ -137,7 +145,7 @@ mrcnpdlk\MojePanstwo\Model\KrsEntity Object
     print_r($res);
 ```
 
- #### Response
+#### Response
  ```php
 mrcnpdlk\MojePanstwo\Model\SearchResponse Object
 (
