@@ -65,14 +65,14 @@ class ModelAbstract extends \stdClass
      */
     protected function cleanTelephoneNr($nr)
     {
-        if (empty($nr)) {
-            return null;
-        } else {
+        if (!empty($value)) {
             $nr = preg_replace('/[^0-9]/', '', strval($nr));
 
             //removing zeros only for national numbers (only single zero at the beginning)
             return preg_replace('/^0(?=([1-9]+[0-9]*))/', '', $nr);
         }
+
+        return null;
     }
 
     /**
