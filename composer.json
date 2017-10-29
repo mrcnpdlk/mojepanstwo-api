@@ -23,7 +23,8 @@
   },
   "require-dev": {
     "mrcnpdlk/monolog": "~0",
-    "phpfastcache/phpfastcache": "~6.0"
+    "phpfastcache/phpfastcache": "~6.0",
+    "phpunit/phpunit": "~6.3"
   },
   "autoload": {
     "psr-4": {
