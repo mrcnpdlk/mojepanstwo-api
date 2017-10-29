@@ -28,7 +28,7 @@ class Nts
     /**
      * @var string
      */
-    public $subregion_id;
+    public $podregion_id;
     /**
      * @var string
      */
@@ -67,7 +67,7 @@ class Nts
             $this->teryt_gmina_typ_id   = substr($nts, -1, 1);
             $this->teryt_gmina_id       = substr($nts, -3, 2);
             $this->teryt_powiat_id      = substr($nts, -5, 2);
-            $this->subregion_id         = substr($nts, -7, 2);
+            $this->podregion_id         = substr($nts, -7, 2);
             $this->teryt_wojewodztwo_id = substr($nts, -9, 2);
             $this->region_id            = substr($nts, -10, 1);
             if ($this->teryt_powiat_id === '00') {
