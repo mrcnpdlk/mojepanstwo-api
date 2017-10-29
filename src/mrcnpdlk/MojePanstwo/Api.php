@@ -19,6 +19,7 @@ namespace mrcnpdlk\MojePanstwo;
 
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
 use mrcnpdlk\MojePanstwo\Model\KrsEntityType;
+use mrcnpdlk\MojePanstwo\Model\Province;
 
 class Api
 {
@@ -122,6 +123,8 @@ class Api
     }
 
     /**
+     * Return KRS Entity Type
+     *
      * @param $id
      *
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntityType
@@ -129,6 +132,20 @@ class Api
     public function getKrsEntityType($id)
     {
         $qb = QueryBuilder::create(KrsEntityType::class);
+
+        return $qb->find(strval($id));
+    }
+
+    /**
+     * Return Province
+     *
+     * @param $id
+     *
+     * @return Province
+     */
+    public function getProvince($id)
+    {
+        $qb = QueryBuilder::create(Province::class);
 
         return $qb->find(strval($id));
     }
@@ -151,6 +168,14 @@ class Api
     public function searchKrsEntityType()
     {
         return QueryBuilder::create(KrsEntityType::class);
+    }
+
+    /**
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     */
+    public function searchProvince()
+    {
+        return QueryBuilder::create(Province::class);
     }
 
 }

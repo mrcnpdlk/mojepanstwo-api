@@ -12,11 +12,6 @@
  * @author  Marcin Pudełek <marcin@pudelek.org.pl>
  */
 
-/**
- * Created by Marcin.
- * Date: 28.10.2017
- * Time: 19:59
- */
 declare (strict_types=1);
 
 namespace mrcnpdlk\MojePanstwo\Model;
