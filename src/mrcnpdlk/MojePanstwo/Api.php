@@ -17,6 +17,7 @@ declare (strict_types=1);
 namespace mrcnpdlk\MojePanstwo;
 
 
+use mrcnpdlk\MojePanstwo\Model\Address\Commune;
 use mrcnpdlk\MojePanstwo\Model\Address\District;
 use mrcnpdlk\MojePanstwo\Model\Address\Province;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
@@ -77,6 +78,18 @@ class Api
     public function getClient()
     {
         return $this->oClient;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Commune
+     */
+    public function getCommune($id)
+    {
+        $qb = QueryBuilder::create(Commune::class);
+
+        return $qb->find(strval($id));
     }
 
     /**
@@ -161,6 +174,14 @@ class Api
         $qb = QueryBuilder::create(Province::class);
 
         return $qb->find(strval($id));
+    }
+
+    /**
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     */
+    public function searchCommune()
+    {
+        return QueryBuilder::create(Commune::class);
     }
 
     /**
