@@ -61,6 +61,7 @@ class SearchResponseLinks
      * @param string|null $first
      * @param string|null $next
      * @param string|null $last
+     * @param string|null $prev
      */
     public function __construct(string $self = null, string $first = null, string $next = null, string $last = null, string $prev = null)
     {

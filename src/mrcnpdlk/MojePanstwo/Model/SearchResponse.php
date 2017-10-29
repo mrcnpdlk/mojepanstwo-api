@@ -48,9 +48,10 @@ class SearchResponse
     /**
      * SearchResponse constructor.
      *
-     * @param                                                 $count
-     * @param                                                 $took
-     * @param \mrcnpdlk\MojePanstwo\Model\SearchResponseLinks $links
+     * @param                                                  $count
+     * @param                                                  $took
+     * @param \mrcnpdlk\MojePanstwo\Model\SearchResponseLinks  $links
+     * @param \mrcnpdlk\MojePanstwo\Model\SearchResponseItem[] $items
      */
     public function __construct($count, $took, SearchResponseLinks $links, $items = [])
     {

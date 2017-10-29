@@ -62,8 +62,9 @@ class QueryBuilder
         $this->query['page']       = null;
         $this->query['limit']      = null;
         $this->sReturnedClass      = $returnedClass;
-        $this->sContext            = $returnedClass::CONTEXT;
-        $this->sPrefixedContext    = '/dane/' . $this->sContext;
+        /** @noinspection PhpUndefinedFieldInspection */
+        $this->sContext         = $returnedClass::CONTEXT;
+        $this->sPrefixedContext = '/dane/' . $this->sContext;
     }
 
     /**

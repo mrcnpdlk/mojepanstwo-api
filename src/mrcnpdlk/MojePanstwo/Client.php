@@ -100,11 +100,12 @@ class Client
     }
 
     /**
-     * @param string                                  $context
-     * @param string|null                                $id
+     * @param string                                  $sPrefixedContext
+     * @param string|null                             $id
      * @param \mrcnpdlk\MojePanstwo\QueryBuilder|null $oParams
      *
      * @return \stdClass
+     * @internal param string $context
      */
     public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null)
     {
