@@ -25,10 +25,14 @@ namespace mrcnpdlk\MojePanstwo\Model;
 class SearchResponse
 {
     /**
+     * Liczba wszystkich obiektów pasujących do zapytania, kolejne strony można zwracać zmieniając parametr page
+     *
      * @var integer
      */
     public $count;
     /**
+     * Długość trwania zapytania w milisekundach
+     *
      * @var integer
      */
     public $took;

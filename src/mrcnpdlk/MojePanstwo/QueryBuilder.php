@@ -116,7 +116,9 @@ class QueryBuilder
             $res->Links->self ?? null,
             $res->Links->first ?? $res->Links->self ?? null,
             $res->Links->next ?? null,
-            $res->Links->last ?? null);
+            $res->Links->last ?? null,
+            $res->Links->prev ?? null
+        );
         $items  = [];
         foreach ($res->Dataobject as $i) {
             $oItem             = new SearchResponseItem();
