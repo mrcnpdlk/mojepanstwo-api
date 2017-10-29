@@ -47,6 +47,12 @@ class District extends ModelAbstract
      */
     public $nts;
     /**
+     * NTS data
+     *
+     * @var \mrcnpdlk\MojePanstwo\Model\Address\Nts
+     */
+    public $nts_object;
+    /**
      * @var string
      */
     public $nazwa;
@@ -80,6 +86,7 @@ class District extends ModelAbstract
             $this->senat_okreg_id    = $this->convertToId($this->senat_okreg_id);
             $this->sejm_okreg_id     = $this->convertToId($this->sejm_okreg_id);
             $this->wojewodztwo_nazwa = $this->{'wojewodztwa.nazwa'};
+            $this->nts_object        = new Nts($this->nts);
         }
     }
 }
