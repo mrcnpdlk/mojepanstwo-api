@@ -185,7 +185,7 @@ class QueryBuilder
      *
      * @return $this
      */
-    public function setContext(string $sContext = null)
+    private function setContext(string $sContext = null)
     {
         $this->sContext = !empty($sContext) ? $sContext : null;
 

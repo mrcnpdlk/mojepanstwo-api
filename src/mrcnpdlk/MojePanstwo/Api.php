@@ -77,7 +77,7 @@ class Api
     }
 
     /**
-     * @param string|int $krs
+     * @param string|int $krs ID or KRS number
      *
      * @param int        $pullFlag
      *
@@ -85,9 +85,10 @@ class Api
      */
     public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE)
     {
-        $qb = QueryBuilder::create(KrsEntity::class)
-                          ->addLayer('jedynyAkcjonariusz')
-                          ->addLayer('komitetZalozycielski')
+        $krs = intval($krs);
+        $qb  = QueryBuilder::create(KrsEntity::class)
+                           ->addLayer('jedynyAkcjonariusz')
+                           ->addLayer('komitetZalozycielski')
         ;
         if ($pullFlag & KrsEntity::PULL_COMPANIES) {
             $qb->addLayer('firmy');
@@ -114,7 +115,7 @@ class Api
             $qb->addLayer('prokurenci');
         }
 
-        return $qb->find(ltrim($krs,'0'));
+        return $qb->find(strval($krs));
     }
 
     public function searchKrsEntity()
