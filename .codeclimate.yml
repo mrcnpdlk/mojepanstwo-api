@@ -6,9 +6,13 @@ engines:
         enabled: false
       Naming/ShortVariable:
         enabled: false
+      Naming/LongVariable:
+        enabled: false
       CleanCode/StaticAccess:
         enabled: false
       Controversial/CamelCaseMethodName:
+        enabled: false
+      Controversial/CamelCasePropertyName:
         enabled: false
   fixme:
     enabled: true
