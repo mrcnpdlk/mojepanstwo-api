@@ -46,103 +46,159 @@ class KrsEntity extends ModelAbstract
 
 
     /**
-     * id
+     * Krs jako int
+     *
+     * @var integer
      **/
     public $id;
     /**
      * krs
+     *
+     * @var string
      **/
     public $krs;
     /**
      * nip
+     *
+     * @var string|null
      **/
     public $nip;
     /**
      * regon
+     *
+     * @var string|null
      **/
     public $regon;
     /**
      * nazwa
+     *
+     * @var string
      **/
     public $nazwa;
     /**
      * nazwa_skrocona
+     *
+     * @var string
      **/
     public $nazwa_skrocona;
     /**
      * adres
+     *
+     * @var string
      **/
     public $adres;
     /**
      * wojewodztwo_id
+     *
+     * @var integer
      **/
     public $wojewodztwo_id;
     /**
      * powiat_id
+     *
+     * @var integer
      **/
     public $powiat_id;
     /**
      * gmina_id
+     *
+     * @var integer
      **/
     public $gmina_id;
     /**
      * miejscowosc_id
+     *
+     * @var integer
      **/
     public $miejscowosc_id;
     /**
      * kod_pocztowy_id
+     *
+     * @var integer
      **/
     public $kod_pocztowy_id;
     /**
      * adres_kod_pocztowy
+     *
+     * @var integer
      **/
     public $adres_kod_pocztowy;
     /**
      * adres_kraj
+     *
+     * @var string
      **/
     public $adres_kraj;
     /**
      * adres_lokal
+     *
+     * @var string
      **/
     public $adres_lokal;
     /**
      * adres_miejscowosc
+     *
+     * @var string
      **/
     public $adres_miejscowosc;
     /**
      * adres_numer
+     *
+     * @var string
      **/
     public $adres_numer;
     /**
      * adres_poczta
+     *
+     * @var string
      **/
     public $adres_poczta;
     /**
      * adres_ulica
+     *
+     * @var string
      **/
     public $adres_ulica;
     /**
+     * siedziba
+     *
+     * @var string
+     **/
+    public $siedziba;
+    /**
      * cel_dzialania
+     *
+     * @var string
      **/
     public $cel_dzialania;
     /**
      * data_dokonania_wpisu
+     *
+     * @var string
      **/
     public $data_dokonania_wpisu;
     /**
      * data_ostatni_wpis
+     *
+     * @var string|null
      **/
     public $data_ostatni_wpis;
     /**
      * data_rejestracji
+     *
+     * @var string
      **/
     public $data_rejestracji;
     /**
      * data_sprawdzenia
+     *
+     * @var string
      **/
     public $data_sprawdzenia;
     /**
      * dotacje_ue_beneficjent_id
+     *
+     * @var integer|null
      **/
     public $dotacje_ue_beneficjent_id;
     /**
@@ -155,162 +211,243 @@ class KrsEntity extends ModelAbstract
     public $firma;
     /**
      * forma_prawna_id
+     *
+     * @var integer
      **/
     public $forma_prawna_id;
     /**
      * forma_prawna_str
+     *
+     * @var string
      **/
     public $forma_prawna_str;
     /**
      * forma_prawna_typ_id
+     *
+     * @var integer
      **/
     public $forma_prawna_typ_id;
     /**
+     * forma_prawna_typ_str - pole dodaane jako dodatkowe
+     *
+     * @var string
+     **/
+    public $forma_prawna_typ_str;
+    /**
      * gpw
+     *
+     * @var mixed
      **/
     public $gpw;
     /**
      * gpw_spolka_id
+     *
+     * @var integer|null
      **/
     public $gpw_spolka_id;
     /**
      * knf_ostrzezenie_id
+     *
+     * @var integer|null
      **/
     public $knf_ostrzezenie_id;
     /**
      * liczba_akcji_wszystkich_emisji
+     *
+     * @var integer
      **/
     public $liczba_akcji_wszystkich_emisji;
     /**
      * liczba_czlonkow_komitetu_zal
+     *
+     * @var integer
      **/
     public $liczba_czlonkow_komitetu_zal;
     /**
      * liczba_dzialalnosci
+     *
+     * @var integer
      **/
     public $liczba_dzialalnosci;
     /**
      * liczba_emisji_akcji
+     *
+     * @var integer
      **/
     public $liczba_emisji_akcji;
     /**
      * liczba_jedynych_akcjonariuszy
+     *
+     * @var integer
      **/
     public $liczba_jedynych_akcjonariuszy;
     /**
      * liczba_nadzorcow
+     *
+     * @var integer
      **/
     public $liczba_nadzorcow;
     /**
      * liczba_oddzialow
+     *
+     * @var integer
      **/
     public $liczba_oddzialow;
     /**
      * liczba_prokurentow
+     *
+     * @var integer
      **/
     public $liczba_prokurentow;
     /**
      * liczba_reprezentantow
+     *
+     * @var integer
      **/
     public $liczba_reprezentantow;
     /**
      * liczba_wspolnikow
+     *
+     * @var integer
      **/
     public $liczba_wspolnikow;
     /**
      * liczba_zmian
+     *
+     * @var integer
      **/
     public $liczba_zmian;
     /**
      * liczba_zmian_umow
+     *
+     * @var integer
      **/
     public $liczba_zmian_umow;
     /**
      * nazwa_organu_nadzoru
+     *
+     * @var string
      **/
     public $nazwa_organu_nadzoru;
     /**
      * nazwa_organu_reprezentacji
+     *
+     * @var string
      **/
     public $nazwa_organu_reprezentacji;
     /**
      * nieprzedsiebiorca
+     *
+     * @var string
+     * @todo DO wyjasnienia znaczenie pola
      **/
     public $nieprzedsiebiorca;
     /**
      * numer_wpisu
+     *
+     * @var string
      **/
     public $numer_wpisu;
     /**
      * opp
+     *
+     * @var string|null
      **/
     public $opp;
     /**
      * ostatni_wpis_id
+     *
+     * @var integer|null
      **/
     public $ostatni_wpis_id;
     /**
      * oznaczenie_sadu
+     *
+     * @var string
      **/
     public $oznaczenie_sadu;
     /**
      * rejestr
+     *
+     * @var string
      **/
     public $rejestr;
     /**
      * rejestr_stowarzyszen
+     *
+     * @var string
      **/
     public $rejestr_stowarzyszen;
     /**
-     * siedziba
-     **/
-    public $siedziba;
-    /**
      * sposob_reprezentacji
+     *
+     * @var string
      **/
     public $sposob_reprezentacji;
     /**
      * sygnatura_akt
+     *
+     * @var string
      **/
     public $sygnatura_akt;
     /**
      * twitter_account_id
+     *
+     * @var string
      **/
     public $twitter_account_id;
     /**
      * umowa_spolki_cywilnej
+     *
+     * @var string|null
      **/
     public $umowa_spolki_cywilnej;
     /**
      * wartosc_czesc_kapitalu_wplaconego
+     *
+     * @var integer
      **/
     public $wartosc_czesc_kapitalu_wplaconego;
     /**
      * wartosc_kapital_docelowy
+     *
+     * @var integer
      **/
     public $wartosc_kapital_docelowy;
     /**
      * wartosc_kapital_zakladowy
+     *
+     * @var integer
      **/
     public $wartosc_kapital_zakladowy;
     /**
      * wartosc_nominalna_akcji
+     *
+     * @var integer
      **/
     public $wartosc_nominalna_akcji;
     /**
      * wartosc_nominalna_podwyzszenia_kapitalu
+     *
+     * @var integer
      **/
     public $wartosc_nominalna_podwyzszenia_kapitalu;
     /**
      * wczesniejsza_rejestracja_str
+     *
+     * @var string
      **/
     public $wczesniejsza_rejestracja_str;
     /**
      * www
+     *
+     * @var string
      **/
     public $www;
     /**
      * wykreslony
+     *
+     * @var string
      **/
     public $wykreslony;
     /**
@@ -351,6 +488,7 @@ class KrsEntity extends ModelAbstract
     {
         parent::__construct($oData);
         if ($oData) {
+            $this->id                        = $this->convertToId($this->id);
             $this->wojewodztwo_id            = $this->convertToId($this->wojewodztwo_id);
             $this->powiat_id                 = $this->convertToId($this->powiat_id);
             $this->gmina_id                  = $this->convertToId($this->gmina_id);
@@ -364,6 +502,20 @@ class KrsEntity extends ModelAbstract
             $this->opp                       = $this->convertToId($this->opp);
             $this->ostatni_wpis_id           = $this->convertToId($this->ostatni_wpis_id);
             $this->regon                     = $this->regon === '0' ? null : $this->regon;
+            $this->data_sprawdzenia          = $this->data_sprawdzenia ? (new \DateTime($this->data_sprawdzenia))->format('Y-m-d H:i:s') : null;
+            switch ($this->forma_prawna_typ_id) {
+                case 1:
+                    $this->forma_prawna_typ_str = 'Organizacje biznesowe';
+                    break;
+                case 2:
+                    $this->forma_prawna_typ_str = 'Organizacje pozarządowe';
+                    break;
+                case 3:
+                    $this->forma_prawna_typ_str = 'Samodzielne publiczne zakłady opieki zdrowotnej';
+                    break;
+                default:
+                    $this->forma_prawna_typ_str = null;
+            }
         }
         if ($oLayers) {
             if (isset($oLayers->dzialalnosci)) {
