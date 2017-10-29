@@ -11,9 +11,15 @@
  *
  * @author  Marcin Pudełek <marcin@pudelek.org.pl>
  */
+declare (strict_types=1);
 
 namespace mrcnpdlk\MojePanstwo;
 
+
+use mrcnpdlk\MojePanstwo\Model\ModelAbstract;
+use mrcnpdlk\MojePanstwo\Model\SearchResponse;
+use mrcnpdlk\MojePanstwo\Model\SearchResponseItem;
+use mrcnpdlk\MojePanstwo\Model\SearchResponseLinks;
 
 class QueryBuilder
 {
@@ -25,28 +31,43 @@ class QueryBuilder
      * @var string
      */
     private $sContext;
+    /**
+     * @var string|null
+     */
+    private $sReturnedClass;
 
     /**
      * QueryBuilder constructor.
      *
-     * @param string|null $sContext
+     * @param string|null $returnedClass
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    private function __construct(string $sContext = null)
+    private function __construct(string $returnedClass = null)
     {
+        if (!class_exists($returnedClass)) {
+            throw new Exception(sprintf('Cannot create QueryBuilder instance. Class [%s] not defined', $returnedClass));
+        }
+        $reflectionA = new \ReflectionClass($returnedClass);
+        if (!$reflectionA->isSubclassOf(ModelAbstract::class)) {
+            throw new Exception(sprintf('Cannot create QueryBuilder instance. Class [%s] not extend ModelAbstract', $returnedClass));
+        }
+
         $this->query['conditions'] = [];
         $this->query['page']       = 1;
         $this->query['limit']      = 50;
-        $this->setContext($sContext);
+        $this->sReturnedClass      = $returnedClass;
+        $this->setContext($returnedClass ? $returnedClass::CONTEXT : null);
     }
 
     /**
-     * @param string|null $sContext
+     * @param string|null $returnedClass
      *
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
      */
-    static public function create(string $sContext = null)
+    static public function create(string $returnedClass = null)
     {
-        return new QueryBuilder($sContext);
+        return new QueryBuilder($returnedClass);
     }
 
     /**
@@ -59,6 +80,59 @@ class QueryBuilder
         $this->query['layers'][] = $layerName;
 
         return $this;
+    }
+
+    /**
+     * Find object having ID
+     *
+     * @param string $id
+     *
+     * @return mixed
+     */
+    public function find(string $id)
+    {
+        $res = Api::getInstance()
+                  ->getClient()
+                  ->request($this->sContext, $id, $this)
+        ;
+
+        return new $this->sReturnedClass($res->data ?? null, $res->layers ?? null);
+    }
+
+    /**
+     * Search result
+     *
+     * @return SearchResponse
+     */
+    public function get()
+    {
+
+        $res    = Api::getInstance()
+                     ->getClient()
+                     ->request($this->sContext, null, $this)
+        ;
+        $oLinks = new SearchResponseLinks(
+            $res->Links->self ?? null,
+            $res->Links->first ?? $res->Links->self ?? null,
+            $res->Links->next ?? null,
+            $res->Links->last ?? null);
+        $items  = [];
+        foreach ($res->Dataobject as $i) {
+            $oItem             = new SearchResponseItem();
+            $oItem->id         = intval($i->id);
+            $oItem->dataset    = $i->dataset;
+            $oItem->url        = $i->url;
+            $oItem->mp_url     = $i->mp_url;
+            $oItem->schema_url = $i->schema_url;
+            $oItem->global_id  = intval($i->global_id);
+            $oItem->slug       = $i->slug;
+            $oItem->score      = $i->score;
+            $oItem->data       = new $this->sReturnedClass($i->data ?? null);
+            $items[]           = $oItem;
+        }
+        $oResp = new SearchResponse($res->Count, $res->Took, $oLinks, $items);
+
+        return $oResp;
     }
 
     /**
@@ -126,12 +200,13 @@ class QueryBuilder
      */
     public function where(string $property, $value)
     {
-        if (empty($this->setContext())) {
+        if (empty($this->sContext)) {
             $this->query['conditions'][$property] = $value;
         } else {
             $this->query['conditions'][sprintf("%s.%s", $this->sContext, $property)] = $value;
         }
-        
+
         return $this;
     }
+
 }

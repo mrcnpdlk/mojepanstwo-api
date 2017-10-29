@@ -12,11 +12,6 @@
  * @author  Marcin Pudełek <marcin@pudelek.org.pl>
  */
 
-/**
- * Created by Marcin.
- * Date: 28.10.2017
- * Time: 19:08
- */
 declare (strict_types=1);
 
 namespace mrcnpdlk\MojePanstwo;
@@ -90,9 +85,7 @@ class Api
      */
     public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE)
     {
-        $krs = intval($krs);
-
-        $qb = QueryBuilder::create()
+        $qb = QueryBuilder::create(KrsEntity::class)
                           ->addLayer('jedynyAkcjonariusz')
                           ->addLayer('komitetZalozycielski')
         ;
@@ -121,11 +114,12 @@ class Api
             $qb->addLayer('prokurenci');
         }
 
+        return $qb->find(ltrim($krs,'0'));
+    }
 
-
-        $res = $this->oClient->request(KrsEntity::CONTEXT, intval($krs), $qb);
-
-        return new KrsEntity($res->data ?? null, $res->layers ?? null);
+    public function searchKrsEntity()
+    {
+        return QueryBuilder::create(KrsEntity::class);
     }
 
 }

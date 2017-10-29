@@ -99,12 +99,12 @@ class Client
 
     /**
      * @param string                                  $context
-     * @param int|null                                $id
+     * @param string|null                                $id
      * @param \mrcnpdlk\MojePanstwo\QueryBuilder|null $oParams
      *
      * @return \stdClass
      */
-    public function request(string $context, int $id = null, QueryBuilder $oParams = null)
+    public function request(string $context, string $id = null, QueryBuilder $oParams = null)
     {
         $tPath = [
             rtrim($this->sApiUrl, '/'),
@@ -117,6 +117,8 @@ class Client
             $tPath[] = '?' . $oParams->getQuery();
         }
         $url = implode('/', $tPath);
+
+        $this->getLogger()->debug(sprintf('REQ: %s', $url));
 
         return $this->oCacheAdapter->useCache(
             function () use ($url) {

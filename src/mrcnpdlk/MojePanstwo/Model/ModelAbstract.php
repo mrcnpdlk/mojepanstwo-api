@@ -24,7 +24,7 @@ namespace mrcnpdlk\MojePanstwo\Model;
 
 use mrcnpdlk\MojePanstwo\Api;
 
-class ModelAbstract
+class ModelAbstract extends \stdClass
 {
     const CONTEXT = '';
 
