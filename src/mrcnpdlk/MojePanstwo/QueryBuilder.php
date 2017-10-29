@@ -32,6 +32,10 @@ class QueryBuilder
      */
     private $sContext;
     /**
+     * @var string
+     */
+    private $sPrefixedContext;
+    /**
      * @var string|null
      */
     private $sReturnedClass;
@@ -43,7 +47,7 @@ class QueryBuilder
      *
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    private function __construct(string $returnedClass = null)
+    private function __construct(string $returnedClass)
     {
         if (!class_exists($returnedClass)) {
             throw new Exception(sprintf('Cannot create QueryBuilder instance. Class [%s] not defined', $returnedClass));
@@ -58,7 +62,8 @@ class QueryBuilder
         $this->query['page']       = null;
         $this->query['limit']      = null;
         $this->sReturnedClass      = $returnedClass;
-        $this->sContext            = $returnedClass ? $returnedClass::CONTEXT : null;
+        $this->sContext            = $returnedClass::CONTEXT;
+        $this->sPrefixedContext    = '/dane/' . $this->sContext;
     }
 
     /**
@@ -66,7 +71,7 @@ class QueryBuilder
      *
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
      */
-    static public function create(string $returnedClass = null)
+    static public function create(string $returnedClass)
     {
         return new QueryBuilder($returnedClass);
     }
@@ -94,7 +99,7 @@ class QueryBuilder
     {
         $res = Api::getInstance()
                   ->getClient()
-                  ->request($this->sContext, $id, $this)
+                  ->request($this->sPrefixedContext, $id, $this)
         ;
 
         return new $this->sReturnedClass($res->data ?? null, $res->layers ?? null);
@@ -110,7 +115,7 @@ class QueryBuilder
 
         $res    = Api::getInstance()
                      ->getClient()
-                     ->request($this->sContext, null, $this)
+                     ->request($this->sPrefixedContext, null, $this)
         ;
         $oLinks = new SearchResponseLinks(
             $res->Links->self ?? null,

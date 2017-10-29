@@ -49,9 +49,11 @@ class Client
      *
      * @param string $apiUrl
      */
-    public function __construct(string $apiUrl = 'https://api-v3.mojepanstwo.pl/dane/')
+    public function __construct(string $apiUrl = 'https://api-v3.mojepanstwo.pl/')
     {
         $this->sApiUrl = $apiUrl;
+        $this->setLoggerInstance();
+        $this->setCacheInstance();
     }
 
     /**
@@ -104,11 +106,11 @@ class Client
      *
      * @return \stdClass
      */
-    public function request(string $context, string $id = null, QueryBuilder $oParams = null)
+    public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null)
     {
         $tPath = [
             rtrim($this->sApiUrl, '/'),
-            trim($context, '/'),
+            trim($sPrefixedContext, '/'),
         ];
         if (!is_null($id)) {
             $tPath[] = $id;
