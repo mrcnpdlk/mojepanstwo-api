@@ -92,15 +92,15 @@ class QueryBuilder
     /**
      * Find object having ID
      *
-     * @param string $id
+     * @param string|int $id
      *
      * @return mixed
      */
-    public function find(string $id)
+    public function find($id)
     {
         $res = Api::getInstance()
                   ->getClient()
-                  ->request($this->sPrefixedContext, $id, $this)
+                  ->request($this->sPrefixedContext, strval($id), $this)
         ;
 
         return new $this->sReturnedClass($res->data ?? null, $res->layers ?? null);

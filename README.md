@@ -24,11 +24,21 @@ API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
   |  3 	|   getProvince	        |Province   	    |
   |  4 	|   getKrsEntityType    |KrsEntityType   	|
   |  5 	|   getKrsEntity	    |KrsEntity   	    |
-  |  6 	|   searchCommune	    |SearchResponse   	|
-  |  7 	|   searchDistrict	    |SearchResponse   	|
-  |  8 	|   searchProvince	    |SearchResponse   	|
-  |  9 	|   searchKrsEntityType	|SearchResponse   	|
-  |  10 |   searchKrsEntity	    |SearchResponse   	|
+  |  6 	|   searchCommune	    |QueryBuilder   	|
+  |  7 	|   searchDistrict	    |QueryBuilder   	|
+  |  8 	|   searchProvince	    |QueryBuilder   	|
+  |  9 	|   searchKrsEntityType	|QueryBuilder   	|
+  |  10 |   searchKrsEntity	    |QueryBuilder   	|
+
+For methods returned `QueryBuilder` object, you are able to use below actions to specify your own conditions:
+
+  | Lp 	| Method name  	        | Returned type   	    |
+  |:---:|:---	                |:---	                |
+  |  1 	|   page()	            |QueryBuilder           |
+  |  2 	|   where()	            |QueryBuilder 	        |
+  |  3 	|   orderBy()	        |QueryBuilder  	        |
+  |  4 	|   limit()             |QueryBuilder   	    |
+  |  5 	|   get()       	    |SearchResponse	        |
 
 ## Basic usage
 ### Client settings
