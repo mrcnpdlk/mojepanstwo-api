@@ -8,9 +8,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/mrcnpdlk/mojepanstwo-api/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mrcnpdlk/mojepanstwo-api/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/mrcnpdlk/mojepanstwo-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mrcnpdlk/mojepanstwo-api/?branch=master)
 
-[![Code Climate](https://codeclimate.com/github/mrcnpdlk/mojepanstwo-api/badges/gpa.svg)](https://codeclimate.com/github/mrcnpdlk/mojepanstwo-api) 
-[![Issue Count](https://codeclimate.com/github/mrcnpdlk/mojepanstwo-api/badges/issue_count.svg)](https://codeclimate.com/github/mrcnpdlk/mojepanstwo-api)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/83c5e3020d1e60cfd143/maintainability)](https://codeclimate.com/github/mrcnpdlk/mojepanstwo-api/maintainability)
 
 
 # mojepanstwo-api
