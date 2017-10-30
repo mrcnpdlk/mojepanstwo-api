@@ -145,6 +145,8 @@ class QueryBuilder
     }
 
     /**
+     * Return params as formatted string
+     *
      * @return string
      */
     public function getQuery()
@@ -176,11 +178,12 @@ class QueryBuilder
     }
 
     /**
+     * Order by option settings
+     *
      * @param string $property
      * @param string $order
      *
      * @return $this
-     * @todo Zaimplementowac
      */
     public function orderBy(string $property, string $order = 'asc')
     {
@@ -195,6 +198,8 @@ class QueryBuilder
     }
 
     /**
+     * Get page number
+     *
      * @param int $page
      *
      * @return $this
@@ -207,6 +212,8 @@ class QueryBuilder
     }
 
     /**
+     * Where option settings
+     *
      * @param string $property
      * @param        $value
      *
