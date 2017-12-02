@@ -24,11 +24,13 @@ API v3 for [https://mojepanstwo.pl](https://mojepanstwo.pl)
   |  3 	|   getProvince	        |Province   	    |
   |  4 	|   getKrsEntityType    |KrsEntityType   	|
   |  5 	|   getKrsEntity	    |KrsEntity   	    |
-  |  6 	|   searchCommune	    |QueryBuilder   	|
-  |  7 	|   searchDistrict	    |QueryBuilder   	|
-  |  8 	|   searchProvince	    |QueryBuilder   	|
-  |  9 	|   searchKrsEntityType	|QueryBuilder   	|
-  |  10 |   searchKrsEntity	    |QueryBuilder   	|
+  |  6 	|   getKrsPerson	    |KrsPerson   	    |
+  |  7 	|   searchCommune	    |QueryBuilder   	|
+  |  8 	|   searchDistrict	    |QueryBuilder   	|
+  |  9 	|   searchProvince	    |QueryBuilder   	|
+  |  10	|   searchKrsEntityType	|QueryBuilder   	|
+  |  11 |   searchKrsEntity	    |QueryBuilder   	|
+  |  12 |   searchKrsPerson	    |QueryBuilder   	|
 
 For methods returned `QueryBuilder` object, you are able to use below actions to specify your own conditions:
 
@@ -36,9 +38,10 @@ For methods returned `QueryBuilder` object, you are able to use below actions to
   |:---:|:---	                |:---	                |
   |  1 	|   page()	            |QueryBuilder           |
   |  2 	|   where()	            |QueryBuilder 	        |
-  |  3 	|   orderBy()	        |QueryBuilder  	        |
-  |  4 	|   limit()             |QueryBuilder   	    |
-  |  5 	|   get()       	    |SearchResponse	        |
+  |  3 	|   whereQ()	        |QueryBuilder 	        |
+  |  4 	|   orderBy()	        |QueryBuilder  	        |
+  |  5 	|   limit()             |QueryBuilder   	    |
+  |  6 	|   get()       	    |SearchResponse	        |
 
 ## Basic usage
 ### Client settings
@@ -226,5 +229,18 @@ mrcnpdlk\MojePanstwo\Model\SearchResponse Object
                 .
         )
 )
+```
+
+### Searching KRS Person
+#### Request
+Calling `searchKrsPerson()` method returns QueryBuilder instance, additional functions as `limit()`, `where()`/`whereQ()`, `page()` are available.
+At the end call method `get()` to receive `SearchResponse` object.
+
+```php
+    $res = $oApi->searchKrsPerson()
+                ->whereQ('Jan Nowak')
+                ->get()
+    ;
+    print_r($res);
 ```
 
