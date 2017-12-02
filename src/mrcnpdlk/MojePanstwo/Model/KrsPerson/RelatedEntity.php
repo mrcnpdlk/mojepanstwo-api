@@ -36,6 +36,10 @@ class RelatedEntity
      * @var int
      */
     public $podmiot_id;
+    /**
+     * @var null|\mrcnpdlk\MojePanstwo\Model\KrsEntity
+     */
+    public $podmiot;
 
     /**
      * RelatedEntity constructor.

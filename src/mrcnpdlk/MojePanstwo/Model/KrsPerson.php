@@ -21,8 +21,10 @@ use mrcnpdlk\MojePanstwo\Model\KrsPerson\RelatedEntity;
 
 class KrsPerson extends ModelAbstract
 {
-    const CONTEXT = 'krs_osoby';
-
+    const CONTEXT           = 'krs_osoby';
+    const PULL_NONE         = 0;
+    const PULL_KRS_ENTITIES = 1;
+    const PULL_ALL          = KrsPerson::PULL_KRS_ENTITIES;
     /**
      * ID osoby z KRS
      *
@@ -86,7 +88,7 @@ class KrsPerson extends ModelAbstract
     /**
      * @var \mrcnpdlk\MojePanstwo\Model\KrsPerson\RelatedEntity[]
      */
-    public $podmioty;
+    public $podmioty = [];
     /**
      * @var string
      */

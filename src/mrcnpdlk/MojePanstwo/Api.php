@@ -168,16 +168,30 @@ class Api
     }
 
     /**
-     * @param $id
+     * @param     $id
+     *
+     * @param int $pullFlag
      *
      * @return KrsPerson
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getPerson($id): KrsPerson
+    public function getKrsPerson($id, int $pullFlag = KrsPerson::PULL_NONE): KrsPerson
     {
         $qb = QueryBuilder::create(KrsPerson::class);
 
-        return $qb->find((string)$id);
+        /**
+         * @var KrsPerson $oKrsPerson
+         */
+        $oKrsPerson = $qb->find((string)$id);
+
+        if ($pullFlag & KrsPerson::PULL_KRS_ENTITIES) {
+            foreach ($oKrsPerson->podmioty as $item) {
+                $item->podmiot = $this->getKrsEntity($item->podmiot_id);
+            }
+        }
+
+
+        return $oKrsPerson;
     }
 
     /**
