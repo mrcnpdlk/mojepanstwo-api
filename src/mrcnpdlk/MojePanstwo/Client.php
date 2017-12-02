@@ -107,6 +107,7 @@ class Client
      *
      * @return \stdClass
      * @internal param string $context
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null): \stdClass
     {

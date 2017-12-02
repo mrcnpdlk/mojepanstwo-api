@@ -22,6 +22,7 @@ use mrcnpdlk\MojePanstwo\Model\Address\District;
 use mrcnpdlk\MojePanstwo\Model\Address\Province;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
 use mrcnpdlk\MojePanstwo\Model\KrsEntityType;
+use mrcnpdlk\MojePanstwo\Model\KrsPerson;
 
 class Api
 {
@@ -86,7 +87,7 @@ class Api
      * @return Commune
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getCommune($id)
+    public function getCommune($id): Commune
     {
         $qb = QueryBuilder::create(Commune::class);
 
@@ -99,7 +100,7 @@ class Api
      * @return District
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getDistrict($id)
+    public function getDistrict($id): District
     {
         $qb = QueryBuilder::create(District::class);
 
@@ -116,7 +117,7 @@ class Api
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntity
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE)
+    public function getKrsEntity($krs, int $pullFlag = KrsEntity::PULL_NONE): KrsEntity
     {
         $krs = (int)$krs;
         $qb  = QueryBuilder::create(KrsEntity::class)
@@ -159,9 +160,22 @@ class Api
      * @return \mrcnpdlk\MojePanstwo\Model\KrsEntityType
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getKrsEntityType($id)
+    public function getKrsEntityType($id): KrsEntityType
     {
         $qb = QueryBuilder::create(KrsEntityType::class);
+
+        return $qb->find((string)$id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return KrsPerson
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
+    public function getPerson($id): KrsPerson
+    {
+        $qb = QueryBuilder::create(KrsPerson::class);
 
         return $qb->find((string)$id);
     }
@@ -174,7 +188,7 @@ class Api
      * @return Province
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function getProvince($id)
+    public function getProvince($id): Province
     {
         $qb = QueryBuilder::create(Province::class);
 
@@ -183,6 +197,7 @@ class Api
 
     /**
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function searchCommune(): QueryBuilder
     {
@@ -191,6 +206,7 @@ class Api
 
     /**
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function searchDistrict(): QueryBuilder
     {
@@ -201,6 +217,7 @@ class Api
      * Return QueryBuilder for searching KRS Entities
      *
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function searchKrsEntity(): QueryBuilder
     {
@@ -211,6 +228,7 @@ class Api
      * Return QueryBuilder for searching KRS Entity Types
      *
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function searchKrsEntityType(): QueryBuilder
     {
@@ -219,6 +237,7 @@ class Api
 
     /**
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function searchProvince(): QueryBuilder
     {
