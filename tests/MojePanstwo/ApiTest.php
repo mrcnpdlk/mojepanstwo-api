@@ -22,6 +22,7 @@ use mrcnpdlk\MojePanstwo\Model\Address\Nts;
 use mrcnpdlk\MojePanstwo\Model\Address\Province;
 use mrcnpdlk\MojePanstwo\Model\KrsEntity;
 use mrcnpdlk\MojePanstwo\Model\KrsEntityType;
+use mrcnpdlk\MojePanstwo\Model\KrsPerson;
 use mrcnpdlk\MojePanstwo\Model\SearchResponse;
 
 class ApiTest extends TestCase
@@ -118,5 +119,13 @@ class ApiTest extends TestCase
         $this->assertInstanceOf(SearchResponse::class, $res);
         $this->assertEquals(1, count($res->items));
         $this->assertInstanceOf(Province::class, $res->items[0]->data);
+    }
+
+    public function testSearchKrsPerson()
+    {
+        $res = $this->oApi->searchKrsPerson()->limit(1)->get();
+        $this->assertInstanceOf(SearchResponse::class, $res);
+        $this->assertEquals(1, count($res->items));
+        $this->assertInstanceOf(KrsPerson::class, $res->items[0]->data);
     }
 }
