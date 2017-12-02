@@ -236,6 +236,17 @@ class Api
     }
 
     /**
+     * Wyszukiwanie osoby w KRS
+     *
+     * @return \mrcnpdlk\MojePanstwo\QueryBuilder
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
+    public function searchKrsPerson(): QueryBuilder
+    {
+        return QueryBuilder::create(KrsPerson::class);
+    }
+
+    /**
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */

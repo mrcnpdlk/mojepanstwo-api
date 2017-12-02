@@ -106,7 +106,6 @@ class Client
      * @param \mrcnpdlk\MojePanstwo\QueryBuilder|null $oParams
      *
      * @return \stdClass
-     * @internal param string $context
      * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null): \stdClass

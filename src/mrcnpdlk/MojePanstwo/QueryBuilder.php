@@ -220,13 +220,31 @@ class QueryBuilder
      *
      * @return $this
      */
-    public function where(string $property, $value)
+    public function where(string $property = null, $value)
     {
+        if (null === $property || 'q' === $property) {
+            return $this->whereQ($value);
+        }
         if (empty($this->sContext)) {
             $this->query['conditions'][$property] = $value;
         } else {
             $this->query['conditions'][sprintf('%s.%s', $this->sContext, $property)] = $value;
         }
+
+
+        return $this;
+    }
+
+    /**
+     * Full text search WHERE
+     *
+     * @param $value
+     *
+     * @return $this
+     */
+    public function whereQ($value)
+    {
+        $this->query['conditions']['q'] = $value;
 
         return $this;
     }
