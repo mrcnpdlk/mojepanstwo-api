@@ -19,7 +19,8 @@
   "require": {
     "php": ">=7.0",
     "ext-curl": "*",
-    "mrcnpdlk/psr16cache-adapter": "~0"
+    "mrcnpdlk/psr16cache-adapter": "~0",
+    "sunra/php-simple-html-dom-parser": "~1"
   },
   "require-dev": {
     "mrcnpdlk/monolog": "~0",
