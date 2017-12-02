@@ -38,11 +38,18 @@ class Share extends ModelAbstract
     public $rodzaj_uprzywilejowania;
 
 
+    /**
+     * Share constructor.
+     *
+     * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null)
     {
         parent::__construct($oData);
         if ($oData) {
-            $this->liczba = intval($this->liczba);
+            $this->liczba = (int)$this->liczba;
         }
     }
 }

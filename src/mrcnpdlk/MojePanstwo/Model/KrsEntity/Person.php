@@ -42,6 +42,13 @@ class Person extends ModelAbstract
     public $funkcja;
 
 
+    /**
+     * Person constructor.
+     *
+     * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null)
     {
         parent::__construct($oData);

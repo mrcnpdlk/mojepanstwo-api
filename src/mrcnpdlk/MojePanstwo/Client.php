@@ -70,6 +70,7 @@ class Client
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        /** @noinspection CurlSslServerSpoofingInspection */
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $output = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -94,7 +95,7 @@ class Client
      *
      * @return \Psr\Log\LoggerInterface
      */
-    public function getLogger()
+    public function getLogger(): LoggerInterface
     {
         return $this->oLogger;
     }
@@ -107,22 +108,23 @@ class Client
      * @return \stdClass
      * @internal param string $context
      */
-    public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null)
+    public function request(string $sPrefixedContext, string $id = null, QueryBuilder $oParams = null): \stdClass
     {
         $tPath = [
             rtrim($this->sApiUrl, '/'),
             trim($sPrefixedContext, '/'),
         ];
-        if (!is_null($id)) {
+        if (null !== $id) {
             $tPath[] = $id;
         }
-        if (!is_null($oParams)) {
+        if (null !== $oParams) {
             $tPath[] = '?' . $oParams->getQuery();
         }
         $url = implode('/', $tPath);
 
         $this->getLogger()->debug(sprintf('REQ: %s', $url));
 
+        /** @noinspection SummerTimeUnsafeTimeManipulationInspection */
         return $this->oCacheAdapter->useCache(
             function () use ($url) {
                 return $this->curlRequest($url);
@@ -152,7 +154,7 @@ class Client
      * @return \mrcnpdlk\MojePanstwo\Client
      * @see https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-16-simple-cache.md PSR-16
      */
-    public function setCacheInstance(CacheInterface $oCache = null)
+    public function setCacheInstance(CacheInterface $oCache = null): Client
     {
         $this->oCache = $oCache;
         $this->setCacheAdapter();

@@ -137,6 +137,8 @@ class Commune extends ModelAbstract
      * Commune constructor.
      *
      * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function __construct(\stdClass $oData = null)
     {
@@ -162,9 +164,9 @@ class Commune extends ModelAbstract
 
             $this->wojewodztwo_nazwa = $this->{'wojewodztwa.nazwa'};
             $this->powiat_nazwa      = $this->{'powiaty.nazwa'};
-            $this->powierzchnia      = floatval($this->powierzchnia);
-            $this->zadluzenie_roczne = floatval($this->zadluzenie_roczne);
-            $this->dochody_roczne    = floatval($this->dochody_roczne);
+            $this->powierzchnia      = (float)$this->powierzchnia;
+            $this->zadluzenie_roczne = (float)$this->zadluzenie_roczne;
+            $this->dochody_roczne    = (float)$this->dochody_roczne;
             $this->nts_teryt         = new Nts($this->nts);
         }
     }

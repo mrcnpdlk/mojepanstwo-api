@@ -50,12 +50,19 @@ class Companies extends ModelAbstract
     public $udzialy_wartosc;
 
 
+    /**
+     * Companies constructor.
+     *
+     * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null)
     {
         parent::__construct($oData);
         if ($oData) {
-            $this->udzialy_wartosc_jedn = floatval($this->udzialy_wartosc_jedn);
-            $this->udzialy_wartosc      = floatval($this->udzialy_wartosc);
+            $this->udzialy_wartosc_jedn = (float)$this->udzialy_wartosc_jedn;
+            $this->udzialy_wartosc      = (float)$this->udzialy_wartosc;
         }
     }
 }

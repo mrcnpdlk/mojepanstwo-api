@@ -69,6 +69,8 @@ class District extends ModelAbstract
      * District constructor.
      *
      * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function __construct(\stdClass $oData = null)
     {

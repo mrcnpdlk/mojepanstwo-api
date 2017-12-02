@@ -479,6 +479,14 @@ class KrsEntity extends ModelAbstract
      */
     public $oddzialy = [];
 
+    /**
+     * KrsEntity constructor.
+     *
+     * @param \stdClass|null $oData
+     * @param \stdClass|null $oLayers
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
         parent::__construct($oData);
@@ -514,42 +522,42 @@ class KrsEntity extends ModelAbstract
         }
         if ($oLayers) {
             if (isset($oLayers->dzialalnosci)) {
-                foreach ($oLayers->dzialalnosci as $i) {
+                foreach ((array)$oLayers->dzialalnosci as $i) {
                     $this->dzialalnosci[] = new Pkd($i);
                 }
             }
             if (isset($oLayers->emisje_akcji)) {
-                foreach ($oLayers->emisje_akcji as $i) {
+                foreach ((array)$oLayers->emisje_akcji as $i) {
                     $this->emisje_akcji[] = new Share($i);
                 }
             }
             if (isset($oLayers->firmy)) {
-                foreach ($oLayers->firmy as $i) {
+                foreach ((array)$oLayers->firmy as $i) {
                     $this->firmy[] = new Companies($i);
                 }
             }
             if (isset($oLayers->nadzor)) {
-                foreach ($oLayers->nadzor as $i) {
+                foreach ((array)$oLayers->nadzor as $i) {
                     $this->nadzor[] = new Person($i);
                 }
             }
             if (isset($oLayers->prokurenci)) {
-                foreach ($oLayers->prokurenci as $i) {
+                foreach ((array)$oLayers->prokurenci as $i) {
                     $this->prokurenci[] = new Person($i);
                 }
             }
             if (isset($oLayers->reprezentacja)) {
-                foreach ($oLayers->reprezentacja as $i) {
+                foreach ((array)$oLayers->reprezentacja as $i) {
                     $this->reprezentacja[] = new Person($i);
                 }
             }
             if (isset($oLayers->wspolnicy)) {
-                foreach ($oLayers->wspolnicy as $i) {
+                foreach ((array)$oLayers->wspolnicy as $i) {
                     $this->wspolnicy[] = new Partner($i);
                 }
             }
             if (isset($oLayers->oddzialy)) {
-                foreach ($oLayers->oddzialy as $i) {
+                foreach ((array)$oLayers->oddzialy as $i) {
                     $this->oddzialy[] = new Department($i);
                 }
             }

@@ -63,6 +63,13 @@ class Partner extends ModelAbstract
     public $udzialy_wartosc;
 
 
+    /**
+     * Partner constructor.
+     *
+     * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null)
     {
         parent::__construct($oData);
@@ -70,8 +77,8 @@ class Partner extends ModelAbstract
             $this->osoba_id              = $this->convertToId($this->osoba_id);
             $this->krs_id                = $this->convertToId($this->krs_id);
             $this->id                    = $this->convertToId($this->id);
-            $this->udzialy_wartosc_jedn = is_null($this->udzialy_wartosc_jedn) ? null : floatval($this->udzialy_wartosc_jedn);
-            $this->udzialy_wartosc       = is_null($this->udzialy_wartosc) ? null : floatval($this->udzialy_wartosc);
+            $this->udzialy_wartosc_jedn = null === $this->udzialy_wartosc_jedn ? null : (float)$this->udzialy_wartosc_jedn;
+            $this->udzialy_wartosc       = null === $this->udzialy_wartosc ? null : (float)$this->udzialy_wartosc;
         }
     }
 }

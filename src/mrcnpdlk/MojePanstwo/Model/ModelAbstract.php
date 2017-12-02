@@ -37,20 +37,22 @@ class ModelAbstract extends \stdClass
      *
      * @param \stdClass|null $oData
      * @param \stdClass|null $oLayers
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function __construct(\stdClass $oData = null, \stdClass $oLayers = null)
     {
-        if (!is_null($oData)) {
+        if (null !== $oData) {
             foreach ($oData as $key => $value) {
                 $key = $this->stripProperty($key);
                 if (!property_exists($this, $key)) {
                     Api::getInstance()
                        ->getClient()
                        ->getLogger()
-                       ->warning(sprintf('Property [%s] not exists in object [%s]', $key, get_class($this)))
+                       ->warning(sprintf('Property [%s] not exists in object [%s]', $key, \get_class($this)))
                     ;
-                } elseif (!is_array($value) && !is_object($value)) {
-                    $this->{$key} = is_string($value) && $value === '' ? null : $value;
+                } elseif (!\is_array($value) && !\is_object($value)) {
+                    $this->{$key} = \is_string($value) && $value === '' ? null : $value;
                 }
             }
         }
@@ -65,11 +67,12 @@ class ModelAbstract extends \stdClass
      */
     protected function cleanTelephoneNr($nr)
     {
-        if (!empty($value)) {
-            $nr = preg_replace('/[^0-9]/', '', strval($nr));
+        if (!empty($nr)) {
+            // removing non digit chars
+            $nr = preg_replace('/\D/', '', (string)$nr);
 
             //removing zeros only for national numbers (only single zero at the beginning)
-            return preg_replace('/^0(?=([1-9]+[0-9]*))/', '', $nr);
+            return preg_replace('/^0(?=([1-9]+\d*))/', '', $nr);
         }
 
         return null;
@@ -84,17 +87,17 @@ class ModelAbstract extends \stdClass
      */
     protected function convertToId($value)
     {
-        return empty($value) ? null : intval($value);
+        return empty($value) ? null : (int)$value;
     }
 
     /**
-     * Remove namesoace class from the property name
+     * Remove namespace class from the property name
      *
      * @param string $property
      *
      * @return string
      */
-    protected function stripProperty(string $property)
+    protected function stripProperty(string $property): string
     {
         return str_replace(static::CONTEXT . '.', '', $property);
     }

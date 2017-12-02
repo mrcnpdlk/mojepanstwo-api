@@ -36,6 +36,13 @@ class Pkd extends ModelAbstract
     public $przewazajaca;
 
 
+    /**
+     * Pkd constructor.
+     *
+     * @param \stdClass|null $oData
+     *
+     * @throws \mrcnpdlk\MojePanstwo\Exception
+     */
     public function __construct(\stdClass $oData = null)
     {
         parent::__construct($oData);

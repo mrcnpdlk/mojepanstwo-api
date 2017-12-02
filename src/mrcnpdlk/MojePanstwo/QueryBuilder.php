@@ -72,7 +72,7 @@ class QueryBuilder
      *
      * @return \mrcnpdlk\MojePanstwo\QueryBuilder
      */
-    static public function create(string $returnedClass)
+    public static function create(string $returnedClass): QueryBuilder
     {
         return new QueryBuilder($returnedClass);
     }
@@ -95,12 +95,13 @@ class QueryBuilder
      * @param string|int $id
      *
      * @return mixed
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
     public function find($id)
     {
         $res = Api::getInstance()
                   ->getClient()
-                  ->request($this->sPrefixedContext, strval($id), $this)
+                  ->request($this->sPrefixedContext, (string)$id, $this)
         ;
 
         return new $this->sReturnedClass($res->data ?? null, $res->layers ?? null);
@@ -110,8 +111,9 @@ class QueryBuilder
      * Search result
      *
      * @return SearchResponse
+     * @throws \mrcnpdlk\MojePanstwo\Exception
      */
-    public function get()
+    public function get(): SearchResponse
     {
 
         $res    = Api::getInstance()
@@ -126,22 +128,21 @@ class QueryBuilder
             $res->Links->prev ?? null
         );
         $items  = [];
-        foreach ($res->Dataobject as $i) {
+        foreach ((array)$res->Dataobject as $i) {
             $oItem             = new SearchResponseItem();
-            $oItem->id         = intval($i->id);
+            $oItem->id         = (int)$i->id;
             $oItem->dataset    = $i->dataset;
             $oItem->url        = $i->url;
             $oItem->mp_url     = $i->mp_url;
             $oItem->schema_url = $i->schema_url;
-            $oItem->global_id  = intval($i->global_id);
+            $oItem->global_id  = (int)$i->global_id;
             $oItem->slug       = $i->slug;
             $oItem->score      = $i->score;
             $oItem->data       = new $this->sReturnedClass($i->data ?? null);
             $items[]           = $oItem;
         }
-        $oResp = new SearchResponse($res->Count, $res->Took, $oLinks, $items);
 
-        return $oResp;
+        return new SearchResponse($res->Count, $res->Took, $oLinks, $items);
     }
 
     /**
@@ -149,7 +150,7 @@ class QueryBuilder
      *
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         if (empty($this->query['order'])) {
             unset($this->query['order']);
@@ -224,7 +225,7 @@ class QueryBuilder
         if (empty($this->sContext)) {
             $this->query['conditions'][$property] = $value;
         } else {
-            $this->query['conditions'][sprintf("%s.%s", $this->sContext, $property)] = $value;
+            $this->query['conditions'][sprintf('%s.%s', $this->sContext, $property)] = $value;
         }
 
         return $this;

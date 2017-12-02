@@ -53,10 +53,10 @@ class SearchResponse
      * @param \mrcnpdlk\MojePanstwo\Model\SearchResponseLinks  $links
      * @param \mrcnpdlk\MojePanstwo\Model\SearchResponseItem[] $items
      */
-    public function __construct($count, $took, SearchResponseLinks $links, $items = [])
+    public function __construct($count, $took, SearchResponseLinks $links, array $items = [])
     {
-        $this->count = intval($count);
-        $this->took  = intval($took);
+        $this->count = (int)$count;
+        $this->took  = (int)$took;
         $this->links = $links;
         $this->items = $items;
     }
