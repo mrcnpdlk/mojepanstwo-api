@@ -118,7 +118,10 @@ class Client
             $tPath[] = $id;
         }
         if (null !== $oParams) {
-            $tPath[] = '?' . $oParams->getQuery();
+            $sUserParams = $oParams->getQuery();
+            if ('' !== $sUserParams) {
+                $tPath[] = '?' . $oParams->getQuery();
+            }
         }
         $url = implode('/', $tPath);
 
