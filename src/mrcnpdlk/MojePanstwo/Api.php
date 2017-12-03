@@ -122,7 +122,6 @@ class Api
         $krs = (int)$krs;
         $qb  = QueryBuilder::create(KrsEntity::class)
                            ->addLayer('jedynyAkcjonariusz')
-                           ->addLayer('komitetZalozycielski')
         ;
         if ($pullFlag & KrsEntity::PULL_COMPANIES) {
             $qb->addLayer('firmy');
@@ -147,6 +146,9 @@ class Api
         }
         if ($pullFlag & KrsEntity::PULL_PERSON_PROXY) {
             $qb->addLayer('prokurenci');
+        }
+        if ($pullFlag & KrsEntity::PULL_PERSON_FOUNDING) {
+            $qb->addLayer('komitetZalozycielski');
         }
 
         return $qb->find((string)$krs);

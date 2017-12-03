@@ -37,7 +37,8 @@ class KrsEntity extends ModelAbstract
     const PULL_PERSON_REPRESENTATION = 32;
     const PULL_PERSON_SUPERVISION    = 64;
     const PULL_PERSON_PROXY          = 128;
-    const PULL_ALL                   = 255;
+    const PULL_PERSON_FOUNDING       = 256;
+    const PULL_ALL                   = 511;
 
 
     /**
@@ -470,10 +471,13 @@ class KrsEntity extends ModelAbstract
      */
     public $reprezentacja = [];
     /**
+     * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Person
+     */
+    public $komitetZalozycielski = [];
+    /**
      * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Partner
      */
     public $wspolnicy = [];
-
     /**
      * @var \mrcnpdlk\MojePanstwo\Model\KrsEntity\Department
      */
@@ -561,19 +565,19 @@ class KrsEntity extends ModelAbstract
                     $this->oddzialy[] = new Department($i);
                 }
             }
-            if (isset($oLayers->jedynyAkcjonariusz) && !empty($oLayers->jedynyAkcjonariusz)) {
+            if (isset($oLayers->jedynyAkcjonariusz) && !empty($oLayers->jedynyAkcjonariusz)) /**
+             * @todo Implement jedynyAkcjonariusz in object KrsEntity - need example, no doc
+             */ {
                 Api::getInstance()
                    ->getClient()
                    ->getLogger()
                    ->warning(sprintf('jedynyAkcjonariusz not defined'))
                 ;
             }
-            if (isset($oLayers->komitetZalozycielski) && !empty($oLayers->komitetZalozycielski)) {
-                Api::getInstance()
-                   ->getClient()
-                   ->getLogger()
-                   ->warning(sprintf('komitetZalozycielski not defined'))
-                ;
+        }
+        if (isset($oLayers->komitetZalozycielski)) {
+            foreach ((array)$oLayers->komitetZalozycielski as $i) {
+                $this->komitetZalozycielski[] = new Person($i);
             }
         }
     }
