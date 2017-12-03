@@ -81,6 +81,18 @@ Pushing Log and Cache instances. Not required, but suggested for better performa
 
 ### Getting KRS Entity
 #### Request
+##### Available pull flags
+  - `KrsEntity::PULL_NONE`
+  - `KrsEntity::PULL_COMPANIES` - Layer `firmy`
+  - `KrsEntity::PULL_DEPARTMENTS` - Layer `oddzialy`
+  - `KrsEntity::PULL_PARTNERS` - Layer `wspolnicy`
+  - `KrsEntity::PULL_PKDS` - Layer `dzialalnosci`
+  - `KrsEntity::PULL_SHARES` - Layer `emisje_akcji`
+  - `KrsEntity::PULL_PERSON_REPRESENTATION` - Layer `reprezentacja`
+  - `KrsEntity::PULL_PERSON_SUPERVISION` - Layer `nadzor`
+  - `KrsEntity::PULL_PERSON_PROXY` - Layer `prokurenci`
+  - `KrsEntity::PULL_PERSON_FOUNDING` - Layer `komitetZalozycielski`
+  - `KrsEntity::PULL_ALL` - All layers
 ```php
     $oApi = \mrcnpdlk\MojePanstwo\Api::create($oClient);
 
@@ -231,11 +243,24 @@ mrcnpdlk\MojePanstwo\Model\SearchResponse Object
 )
 ```
 
+### Getting KRS Person
+#### Request
+##### Available pull flags
+  - `KrsPerson::PULL_NONE`
+  - `KrsPerson::PULL_KRS_ENTITIES`
+  - `KrsPerson::PULL_ALL`
+
+```php
+    $oApi = \mrcnpdlk\MojePanstwo\Api::create($oClient);
+
+    $res = $oApi->getKrsPerson('1491928',\mrcnpdlk\MojePanstwo\Model\KrsPerson::PULL_ALL);
+    print_r($res);
+```
+
 ### Searching KRS Person
 #### Request
 Calling `searchKrsPerson()` method returns QueryBuilder instance, additional functions as `limit()`, `where()`/`whereQ()`, `page()` are available.
 At the end call method `get()` to receive `SearchResponse` object.
-
 ```php
     $res = $oApi->searchKrsPerson()
                 ->whereQ('Jan Nowak')
